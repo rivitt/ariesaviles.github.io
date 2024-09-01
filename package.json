@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "run-p next-dev tlapse",
+    "dev": "run-p next-dev tlapse-mobile",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "next-dev": "next dev",
-    "tlapse": "tlapse localhost:3000"
+    "tlapse": "tlapse localhost:3000",
+    "tlapse-mobile": "tlapse localhost:3000 --viewport 1080x1920"
   },
   "dependencies": {
     "next": "14.2.7",
