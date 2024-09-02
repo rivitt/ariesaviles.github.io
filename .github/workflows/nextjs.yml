@@ -78,13 +78,6 @@ jobs:
         with:
           path: ./out
 
-      - name: Stop the server
-        if: always()
-        run: |
-          if jobs -p > /dev/null; then
-            kill $(jobs -p)
-          fi
-
   # Deployment job
   deploy:
     environment:

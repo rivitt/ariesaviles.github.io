@@ -31,9 +31,3 @@ jobs:
 
       - name: Run cURL request to check for runtime errors
         run: curl -I http://localhost:3000
-
-      - name: Stop the server if jobs are still running
-        run: |
-          if jobs -p > /dev/null; then
-            kill $(jobs -p)
-          fi
