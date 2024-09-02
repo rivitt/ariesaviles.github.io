@@ -1,4 +1,4 @@
-name: PR Checks for Next.js
+name: PR merge into main check
 
 on:
   pull_request:
@@ -32,5 +32,8 @@ jobs:
       - name: Run cURL request to check for runtime errors
         run: curl -I http://localhost:3000
 
-      - name: Kill server
-        run: kill $(jobs -p)
+      - name: Stop the server if jobs are still running
+        run: |
+          if jobs -p > /dev/null; then
+            kill $(jobs -p)
+          fi
