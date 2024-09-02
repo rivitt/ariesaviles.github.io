@@ -2,40 +2,42 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="px-60 py-36 relative flex justify-center items-center bg-gradient-to-b from-[#FFE7C8] to-[#FFF7EC]">
+    <main className="px-10 lg:px-32 py-10 relative flex flex-col items-center bg-gradient-to-b from-[#FFE7C8] to-[#FFF7EC]">
       {/* border */}
       <div className="fixed inset-0 border-[20px] border-white z-50 pointer-events-none"></div>
-      {/* content */}
-      <div className="flex flex-col w-full max-w-screen-sm md:max-w-screen-lg bg-red-500">
-        <div
-          id="top-row"
-          className="flex flex-row justify-between items-center bg-white"
-        >
-          <h1 className="text-4xl font-bold">Aries</h1>
-          <p>Let&apos;s talk</p>
-        </div>
-        <div className="relative flex flex-col bg-green-600 m-10">
-          {/* Orange Box and Image - Right Side */}
-          <div className="relative w-full flex justify-end items-start bg-blue-500 border-2">
-            {/* Orange Box */}
-            <div className="absolute w-2/3 bg-orange-400 h-40 rounded-2xl" />
 
-            {/* Image on top of Orange Box */}
-            <div className="absolute w-2/3 flex justify-center">
-              <div className="bg-gray-200 w-40 h-40 rounded-full mt-4">
-                Image here of head with masked outline
-              </div>
-            </div>
+      {/* header */}
+      <div className="fixed px-10 lg:px-32 z-50 flex flex-row w-full h-fit justify-between items-center bg-white">
+        <h1 className="text-4xl font-bold">Aries</h1>
+        <p>Let&apos;s talk</p>
+      </div>
+
+      {/* hero */}
+      <div className="flex flex-col lg:flex-row-reverse w-full h-[calc(100vh-5rem)] items-center bg-green-600 space-y-10">
+        <div className="relative justify-center items-start lg:justify-end lg:items-center w-full h-2/4 bg-yellow-400 transform translate-y-40 lg:translate-y-0">
+          <div className="absolute flex w-full items-center lg:w-[125%] bg-orange-400 h-40 rounded-2xl lg:right-0 lg:top-1/2 lg:transform lg:-translate-y-1/2 z-10">
+            <div className="absolute left-1/2 transform -translate-x-1/2 bg-gray-200 w-48 h-64 rounded-full z-30" />
+            <div className="absolute left-1/2 transform -translate-x-1/2 bg-yellow-400 w-56 h-72 rounded-full z-20" />
           </div>
-
-          {/* Hero Text - Overlapping the Orange Box */}
-          <div className="absolute flex flex-col justify-start text-left z-10 p-4">
-            <h1 className="text-4xl font-bold">I&apos;m Aries,</h1>
-            <p className="text-4xl">a Software Engineer & Mentor.</p>
-            <p className="text-4xl">I enjoy bringing dreams to life.</p>
+        </div>
+        <div className="relative flex w-full h-2/5 lg:h-full justify-center text-2xl">
+          {/* <!-- Hero text section with higher z-index to be on top --> */}
+          <div className="absolute flex flex-col text-center lg:justify-center lg:text-left w-full lg:h-4/5 leading-19 z-30">
+            <p className="text-4xl my-2">I&apos;m Aries,</p>
+            <p>a Software Engineer & Mentor.</p>
+            <p>tag line here</p>
+          </div>
+          {/* <!-- "SCROLL" section with higher z-index to be on top --> */}
+          <div className="absolute bottom-0 w-full h-fit flex flex-col items-center pt-10 space-y-2 z-30">
+            <p>SCROLL</p>
+            <div className="border-[1px] border-black h-[7rem] w-fit" />
           </div>
         </div>
       </div>
+
+      {/* projects */}
+      <div className="flex flex-col w-full h-60 bg-red-500">projects</div>
+      <div className="pt-10">my work in progress</div>
     </main>
   );
 }
