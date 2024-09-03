@@ -8,6 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        salmon: "#FFC7A7",
+      },
+      gradientColorStopPositions: {
+        1: "1%",
+        99: "99%",
+      },
+      maxWidth: {
+        "2xs": "16rem",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

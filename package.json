@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "run-p next-dev tlapse",
+    "dev": "run-p next-dev tlapse-mobile",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
