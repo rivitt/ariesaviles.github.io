@@ -88,11 +88,11 @@ export default function Home() {
           {projects.map((project, index) => {
             return (
               <div
+                key={project.name}
                 className="w-full md:pt-[calc(80px*var(--index))]"
                 style={{ "--index": index } as React.CSSProperties}
               >
                 <div
-                  key={project.name}
                   className={`flex flex-col justify-between ${project.color} rounded-xl p-4 space-y-8`}
                 >
                   <div className="space-y-2">
