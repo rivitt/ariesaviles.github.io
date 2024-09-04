@@ -66,7 +66,7 @@ export default function Home() {
             </div>
             <div className="text-2xl leading-9 hidden lg:block">
               <p>
-                I'm a Software Engineer & Mentor who&apos;s dedicated to
+                I&apos;m a Software Engineer & Mentor who&apos;s dedicated to
                 bringing dreams to life.
               </p>
             </div>
