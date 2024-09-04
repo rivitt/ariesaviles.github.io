@@ -6,28 +6,47 @@ import {
 import Image from "next/image";
 
 export default function Home() {
+  const projects = [
+    {
+      name: "End-to-end Platform Development",
+      description: "project where i led full end-to-end platform development",
+      color: "bg-red-500",
+    },
+    {
+      name: "Cross-Platform Solutions",
+      description:
+        "project where i led web and mobile dev, android and ios too!",
+      color: "bg-green-500",
+    },
+    {
+      name: "Award-Winning Web3 Tool",
+      description: "wallet hackathon tax tool",
+      color: "bg-blue-500",
+    },
+  ];
+
   return (
-    <main className="px-10 lg:px-32 py-10 relative flex flex-col items-center bg-gradient-to-b from-[#FFE7C8] from-1% to-[#FFF7EC] to-10% lg:to-20%">
+    <main className="px-10 lg:px-32 py-10 min-h-screen relative flex flex-col space-y-5 items-center bg-gradient-to-b from-[#FFE7C8] from-1% to-[#FFF7EC] to-10% lg:to-20%">
       {/* border */}
       <div className="fixed inset-0 border-[20px] border-white z-50 pointer-events-none"></div>
 
       {/* header */}
-      <div className="fixed py-5 px-10 lg:px-32 z-50 flex flex-row w-full h-fit justify-between items-center">
+      <div className="fixed px-10 lg:px-32 z-50 flex flex-row w-full h-fit justify-between items-center">
         <AriesWritten className="h-20 w-auto" />
         <p>Let&apos;s talk</p>
       </div>
 
       {/* hero */}
-      <div className="flex flex-col lg:flex-row-reverse w-full max-w-6xl h-[calc(100vh-5rem)] items-center bg-green-600/ space-y-10">
+      <div className="flex flex-col lg:flex-row-reverse w-full max-w-5xl h-[calc(100vh-5rem)] items-center bg-green-600/ space-y-10">
         <div className="relative justify-center items-start lg:justify-end lg:items-center w-full h-2/4 bg-yellow-400/ transform translate-y-40 lg:translate-y-0">
-          <div className="absolute flex w-full items-center lg:w-[125%] bg-salmon h-3/6 rounded-2xl lg:right-0 lg:top-1/2 lg:transform lg:-translate-y-1/2 z-10">
+          <div className="absolute flex w-full items-center lg:w-[125%] max-h-[10rem] bg-salmon h-3/6 rounded-2xl lg:right-0 lg:top-1/2 lg:transform lg:-translate-y-1/2 z-10">
             {/* <div className="absolute left-1/2 transform -translate-x-1/2 bg-gray-200 w-48 h-64 rounded-full z-30" /> */}
             <AriesIllustration className="absolute left-1/2 transform -translate-x-1/2 w-3/5 max-w-2xs lg:max-w-sm h-auto z-30" />
             <AriesIllustrationOutline className="absolute left-1/2 transform -translate-x-[49.50%] translate-y-[0%] w-[67%] max-w-[17.75rem] lg:max-w-[26rem] h-auto z-20" />
             {/* <div className="absolute left-1/2 transform -translate-x-1/2 bg-yellow-400 w-56 h-72 rounded-full z-20" /> */}
           </div>
         </div>
-        <div className="relative flex w-full h-2/5 lg:h-full justify-center text-2xl">
+        <div className="relative flex w-full h-2/5 lg:h-full justify-center text-2xl bg-green-400/">
           {/* <!-- Hero text section with higher z-index to be on top --> */}
           <div className="absolute flex flex-col text-center lg:justify-center lg:text-left w-full lg:h-4/5 leading-19 z-30">
             <p className="text-4xl my-2">I&apos;m Aries,</p>
@@ -43,8 +62,31 @@ export default function Home() {
       </div>
 
       {/* projects */}
-      <div className="flex flex-col w-full h-60 bg-red-500/">projects</div>
-      <div className="pt-10">my work in progress</div>
+      <h2>Portfolio Highlights</h2>
+      <div className="flex-1 grid md:grid-cols-3 gap-4 w-full max-w-5xl h-full">
+        {projects.map((project, index) => {
+          return (
+            <div
+              className="w-full"
+              style={{ paddingTop: `calc(80px * ${index})` }}
+            >
+              <div
+                key={project.name}
+                className={`flex flex-col justify-between ${project.color} rounded-xl p-4 space-y-4`}
+              >
+                <div>
+                  <h2 className="text-2xl">{project.name}</h2>
+                  <p>{project.description}</p>
+                </div>
+                <div className="bg-white h-[30rem] w-full rounded-xl" />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <h2>About Me</h2>
+      <div className="">Learn more about me</div>
     </main>
   );
 }
