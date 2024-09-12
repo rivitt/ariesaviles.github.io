@@ -1,11 +1,18 @@
+"use client";
+
 import {
   AriesIllustration,
   AriesIllustrationOutline,
   AriesWritten,
 } from "@/components/SvgContainers";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
 
 export default function Home() {
+  const hairGroupRef = useRef<SVGGElement>(null);
+  const entireHeadRef = useRef<SVGGElement>(null);
+
   const projects = [
     {
       name: "End-to-end Platform Development",
@@ -24,6 +31,43 @@ export default function Home() {
       color: "bg-blue-500",
     },
   ];
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const entireHeadPath = entireHeadRef.current;
+
+    // Configurable parameters
+    const maxRotation = 2; // Maximum rotation in degrees
+    const dampingFactor = 10; // Controls the damping effect
+
+    if (entireHeadPath) {
+      // Get the container dimensions
+      const container = e.currentTarget.getBoundingClientRect();
+      const centerX = container.width / 2;
+
+      // Calculate the mouse position relative to the center of the container
+      const mouseX = e.clientX - container.left;
+
+      // Calculate rotation based on horizontal movement (for 1D effect)
+      let rotation = (mouseX - centerX) / 10; // Adjust sensitivity as needed
+
+      // Damping function to soften the movement as it reaches the limit
+      // The dampingFactor value is increased to soften the rotation further
+      const dampenedRotation =
+        (rotation / maxRotation) ** dampingFactor *
+        maxRotation *
+        Math.sign(rotation);
+
+      // Constrain rotation to -maxRotation to maxRotation degrees
+      const constrainedRotation = Math.max(
+        -maxRotation,
+        Math.min(maxRotation, dampenedRotation)
+      );
+
+      // Apply transformation to the head
+      const transform = `rotate(${constrainedRotation}deg)`; // Single axis rotation
+      entireHeadPath.style.transform = transform;
+      entireHeadPath.style.transformOrigin = "center center"; // Rotate around the center
+    }
+  };
 
   return (
     <main className="px-10 lg:px-32 py-10 min-h-screen relative flex flex-col space-y-8 items-center bg-gradient-to-b from-[#FFE7C8] from-1% to-[#FFF7EC] to-10% lg:to-20%">
@@ -37,11 +81,20 @@ export default function Home() {
       </div>
 
       {/* hero */}
-      <div className="px-2 lg:px-0 flex flex-col lg:flex-row-reverse w-full max-w-5xl h-[calc(100vh-5rem)] items-center bg-green-600/ space-y-10">
+      <motion.div
+        initial="rest"
+        whileHover="hover"
+        animate="rest"
+        className="px-2 lg:px-0 flex flex-col lg:flex-row-reverse w-full max-w-5xl h-[calc(100vh-5rem)] items-center bg-green-600/ space-y-10"
+        // onMouseMove={(e) => handleMouseMove(e)}
+      >
         <div className="relative justify-center items-start lg:justify-end lg:items-center w-full h-2/4 bg-yellow-400/ transform translate-y-40 lg:translate-y-0">
           <div className="absolute flex w-full items-center lg:w-[125%] max-h-[10rem] bg-salmon h-3/6 rounded-2xl lg:right-0 lg:top-1/2 lg:transform lg:-translate-y-1/2 z-10">
             {/* <div className="absolute left-1/2 transform -translate-x-1/2 bg-gray-200 w-48 h-64 rounded-full z-30" /> */}
-            <AriesIllustration className="absolute left-1/2 transform -translate-x-1/2 w-3/5 max-w-2xs lg:max-w-sm h-auto z-30" />
+            <AriesIllustration
+              groupRefs={{ entireHeadRef, hairGroupRef }}
+              className="absolute left-1/2 transform -translate-x-1/2 w-3/5 max-w-2xs lg:max-w-sm h-auto z-30"
+            />
             <AriesIllustrationOutline className="absolute left-1/2 transform -translate-x-[49.50%] translate-y-[0%] w-[67%] max-w-[17.75rem] lg:max-w-[26rem] h-auto z-20" />
             {/* <div className="absolute left-1/2 transform -translate-x-1/2 bg-yellow-400 w-56 h-72 rounded-full z-20" /> */}
           </div>
@@ -77,7 +130,7 @@ export default function Home() {
             <div className="border-[1px] border-black h-[8rem] lg:h-[12rem] w-fit" />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* projects */}
       <div className="px-2 lg:px-0 flex-1 h-full w-full max-w-5xl space-y-10">
