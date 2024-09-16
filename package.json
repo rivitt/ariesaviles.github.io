@@ -12,7 +12,6 @@
     "tlapse-mobile": "tlapse localhost:3000 --viewport 452xauto"
   },
   "dependencies": {
-    "framer-motion": "^11.5.4",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18"
