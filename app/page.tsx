@@ -35,9 +35,10 @@ export default function Home() {
       color: "bg-blue-500",
     },
   ];
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const entireHeadPath = entireHeadRef.current;
-    const rect = e.target.getBoundingClientRect();
+    const target = e.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
 
     const width = rect.width;
     const height = rect.height;
