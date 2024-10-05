@@ -2,16 +2,20 @@
 
 import {
   AriesIllustration,
+  AriesIllustration2,
   AriesIllustrationOutline,
   AriesWritten,
 } from "@/components/SvgContainers";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
 export default function Home() {
   const hairGroupRef = useRef<SVGGElement>(null);
   const entireHeadRef = useRef<SVGGElement>(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
   const projects = [
     {
@@ -31,46 +35,34 @@ export default function Home() {
       color: "bg-blue-500",
     },
   ];
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const entireHeadPath = entireHeadRef.current;
+    const target = e.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
 
-    // Configurable parameters
-    const maxRotation = 2; // Maximum rotation in degrees
-    const dampingFactor = 10; // Controls the damping effect
+    const width = rect.width;
+    const height = rect.height;
 
-    if (entireHeadPath) {
-      // Get the container dimensions
-      const container = e.currentTarget.getBoundingClientRect();
-      const centerX = container.width / 2;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
 
-      // Calculate the mouse position relative to the center of the container
-      const mouseX = e.clientX - container.left;
+    // console.log("mouseX", mouseX, "mouseY", mouseY);
 
-      // Calculate rotation based on horizontal movement (for 1D effect)
-      let rotation = (mouseX - centerX) / 10; // Adjust sensitivity as needed
+    const xPercent = mouseX / width - 0.5;
+    const yPercent = mouseY / height - 0.5;
 
-      // Damping function to soften the movement as it reaches the limit
-      // The dampingFactor value is increased to soften the rotation further
-      const dampenedRotation =
-        (rotation / maxRotation) ** dampingFactor *
-        maxRotation *
-        Math.sign(rotation);
-
-      // Constrain rotation to -maxRotation to maxRotation degrees
-      const constrainedRotation = Math.max(
-        -maxRotation,
-        Math.min(maxRotation, dampenedRotation)
-      );
-
-      // Apply transformation to the head
-      const transform = `rotate(${constrainedRotation}deg)`; // Single axis rotation
-      entireHeadPath.style.transform = transform;
-      entireHeadPath.style.transformOrigin = "center center"; // Rotate around the center
-    }
+    x.set(xPercent);
+    y.set(yPercent);
   };
 
   return (
-    <main className="px-10 lg:px-32 py-10 min-h-screen relative flex flex-col space-y-8 items-center bg-gradient-to-b from-[#FFE7C8] from-1% to-[#FFF7EC] to-10% lg:to-20%">
+    <motion.main
+      initial="rest"
+      whileHover="hover"
+      animate="rest"
+      onMouseMove={(e) => handleMouseMove(e)}
+      className="px-10 py-10 min-h-screen relative flex flex-col space-y-8 items-center bg-gradient-to-b from-[#FFE7C8] from-1% to-[#FFF7EC] to-10% lg:to-20%"
+    >
       {/* border */}
       <div className="fixed inset-0 border-[20px] border-white z-50 pointer-events-none"></div>
 
@@ -82,20 +74,19 @@ export default function Home() {
 
       {/* hero */}
       <motion.div
-        initial="rest"
-        whileHover="hover"
-        animate="rest"
-        className="px-2 lg:px-0 flex flex-col lg:flex-row-reverse w-full max-w-5xl h-[calc(100vh-5rem)] items-center bg-green-600/ space-y-10"
+        className="px-2 flex flex-col lg:flex-row-reverse w-full max-w-5xl h-[calc(100vh-5rem)] items-center bg-green-600/ space-y-10"
         // onMouseMove={(e) => handleMouseMove(e)}
       >
         <div className="relative justify-center items-start lg:justify-end lg:items-center w-full h-2/4 bg-yellow-400/ transform translate-y-40 lg:translate-y-0">
           <div className="absolute flex w-full items-center lg:w-[125%] max-h-[10rem] bg-salmon h-3/6 rounded-2xl lg:right-0 lg:top-1/2 lg:transform lg:-translate-y-1/2 z-10">
             {/* <div className="absolute left-1/2 transform -translate-x-1/2 bg-gray-200 w-48 h-64 rounded-full z-30" /> */}
-            <AriesIllustration
+            <AriesIllustration2
               groupRefs={{ entireHeadRef, hairGroupRef }}
-              className="absolute left-1/2 transform -translate-x-1/2 w-3/5 max-w-2xs lg:max-w-sm h-auto z-30"
+              x={x}
+              y={y}
+              className="absolute left-1/2 transform -translate-x-1/2 w-4/5 max-w-2xs lg:max-w-sm h-auto z-30"
             />
-            <AriesIllustrationOutline className="absolute left-1/2 transform -translate-x-[49.50%] translate-y-[0%] w-[67%] max-w-[17.75rem] lg:max-w-[26rem] h-auto z-20" />
+            {/* <AriesIllustrationOutline className="absolute left-1/2 transform -translate-x-[49.50%] translate-y-[0%] w-[67%] max-w-[17.75rem] lg:max-w-[26rem] h-auto z-20" /> */}
             {/* <div className="absolute left-1/2 transform -translate-x-1/2 bg-yellow-400 w-56 h-72 rounded-full z-20" /> */}
           </div>
         </div>
@@ -125,10 +116,10 @@ export default function Home() {
             </div>
           </div>
           {/* <!-- "SCROLL" section with higher z-index to be on top --> */}
-          <div className="absolute bottom-0 lg:-left-[18%] w-full h-fit flex flex-col items-center pt-10 space-y-2 z-30">
+          {/* <div className="absolute bottom-0 lg:-left-[18%] w-full h-fit flex flex-col items-center pt-10 space-y-2 z-10">
             <p>SCROLL</p>
             <div className="border-[1px] border-black h-[8rem] lg:h-[12rem] w-fit" />
-          </div>
+          </div> */}
         </div>
       </motion.div>
 
@@ -162,6 +153,6 @@ export default function Home() {
 
       <h2>About Me</h2>
       <div className="">Learn more about me</div>
-    </main>
+    </motion.main>
   );
 }
