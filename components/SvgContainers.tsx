@@ -671,60 +671,6 @@ export const AriesIllustration2: React.FC<AnimatedSvgContainerProps> = ({
   x,
   y,
 }) => {
-  const shirtWhiteRef = useRef<SVGPathElement>(null);
-  const shirtFillRef = useRef<SVGPathElement>(null);
-  const jawLineRef = useRef<SVGPathElement>(null);
-  const noseLineRef = useRef<SVGPathElement>(null);
-  const lefteyeLineRef = useRef<SVGPathElement>(null);
-  const lefteyeEyelashLineFillRef = useRef<SVGPathElement>(null);
-  const lefteyeIrisLineFillRef = useRef<SVGPathElement>(null);
-  const lefteyePupilFillRef = useRef<SVGEllipseElement>(null);
-  const lefteyeTwinkleFillRef = useRef<SVGEllipseElement>(null);
-  const mouthLineRef = useRef<SVGPathElement>(null);
-  const righteyeLineFillRef = useRef<SVGPathElement>(null);
-  const righteyeIrisLineFillRef = useRef<SVGPathElement>(null);
-  const righteyePupilFillRef = useRef<SVGEllipseElement>(null);
-  const righteyeTwinkleFillRef = useRef<SVGEllipseElement>(null);
-  const righteyeEyelashLineFillRef = useRef<SVGPathElement>(null);
-  const beardFillRef = useRef<SVGPathElement>(null);
-  const beardPatchFillRef = useRef<SVGPathElement>(null);
-  const mustacheFillRef = useRef<SVGPathElement>(null);
-  const neckLineFillRef = useRef<SVGPathElement>(null);
-  const hairMainShadowFillRef = useRef<SVGPathElement>(null);
-  const hairLilShadowFillRef = useRef<SVGPathElement>(null);
-  const noseShadowFillRef = useRef<SVGPathElement>(null);
-  const righteyeShadowFillRef = useRef<SVGPathElement>(null);
-  const lefteyeShadowFillRef = useRef<SVGPathElement>(null);
-  const lightHair1FillRef = useRef<SVGPathElement>(null);
-  const lightHair2FillRef = useRef<SVGPathElement>(null);
-  const lightHair7FillRef = useRef<SVGPathElement>(null);
-  const lightHair3FillRef = useRef<SVGPathElement>(null);
-  const lightHair4FillRef = useRef<SVGPathElement>(null);
-  const lightHair5FillRef = useRef<SVGPathElement>(null);
-  const lightHair6FillRef = useRef<SVGPathElement>(null);
-  const shadowHair1FillRef = useRef<SVGPathElement>(null);
-  const shadowHair2FillRef = useRef<SVGPathElement>(null);
-  const shadowHair3FillRef = useRef<SVGPathElement>(null);
-  const shadowHair4FillRef = useRef<SVGPathElement>(null);
-  const shadowHair5FillRef = useRef<SVGPathElement>(null);
-  const shadowHair6FillRef = useRef<SVGPathElement>(null);
-  const shadowHair7FillRef = useRef<SVGPathElement>(null);
-  const leftEyebrowFillLineRef = useRef<SVGPathElement>(null);
-  const rightEyebrowFillLineRef = useRef<SVGPathElement>(null);
-  const rightEarFillLineRef = useRef<SVGPathElement>(null);
-  const rightEarring1FillLineRef = useRef<SVGPathElement>(null);
-  const rightEarring2FillLineRef = useRef<SVGPathElement>(null);
-  const rightEarShadowFillRef = useRef<SVGPathElement>(null);
-  const leftEarFillLineRef = useRef<SVGPathElement>(null);
-  const leftEarring1FillLineRef = useRef<SVGPathElement>(null);
-  const leftEarring2FillLineRef = useRef<SVGPathElement>(null);
-  const leftEarShadowFillRef = useRef<SVGPathElement>(null);
-  const rightShoulderLineRef = useRef<SVGPathElement>(null);
-  const leftShoulderLineRef = useRef<SVGPathElement>(null);
-  const neckShadowFillRef = useRef<SVGPathElement>(null);
-  const rightEyebrowShadowFillRef = useRef<SVGPathElement>(null);
-  const leftEyebrowShadowFillRef = useRef<SVGPathElement>(null);
-
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
 
@@ -945,7 +891,16 @@ export const AriesIllustration2: React.FC<AnimatedSvgContainerProps> = ({
         stroke="#3B3B3B"
         strokeWidth="10"
       />
-      <g id="entirehead">
+      <motion.g
+        id="entirehead"
+        // variants={entireHeadVariants}
+        style={{
+          // translateX: headTranslateX,
+          translateY: headTranslateY,
+          // rotateZ: headRotateZ,
+        }}
+        ref={groupRefs.entireHeadRef}
+      >
         <path
           id="lefteye_white"
           d="M460.673 629.833C433.958 614.984 409.885 612.418 361.129 605.059C359.941 604.88 358.751 604.566 357.647 604.091C342.773 597.685 334.35 587.804 330.226 580.207C327.798 575.735 329.231 570.426 332.895 566.895C348.725 551.634 379.38 528.718 410.197 526.517C444.087 524.096 472.908 541.952 484.222 552.102C484.973 552.776 485.621 553.529 486.201 554.355C500.432 574.638 524.555 615.15 513.512 624.353C503.138 632.998 479.591 633.023 466.551 631.751C464.475 631.549 462.496 630.846 460.673 629.833Z"
@@ -1249,7 +1204,7 @@ export const AriesIllustration2: React.FC<AnimatedSvgContainerProps> = ({
             fill="#D9D9D9"
           />
         </g>
-      </g>
+      </motion.g>
 
       <defs>
         <linearGradient
